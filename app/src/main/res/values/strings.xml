@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Andriot</string>
+    <string name="action_settings">Settings</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="add_project">Add project</string>
+    <string name="err_project_name_empty">Project name could not be empty</string>
+    <string name="err_input_required">Valid Input Required</string>
+    <string name="project_list_activity_label">AndrIOT Project List</string>
+    <string name="new_project_activity_label">New Project</string>
+    <string name="project_activity_label">AndrIOT Project</string>
+    <string name="project_edit">Edit</string>
+    <string name="project_add_dev_feauture">Add Feature</string>
+</resources>
