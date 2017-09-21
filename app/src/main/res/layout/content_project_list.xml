@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragments_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
     tools:context="org.danibeni.andriot.ProjectListActivity"
     tools:showIn="@layout/activity_project_list"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <fragment
-        android:id="@+id/project_list_fragment"
-        android:name="org.danibeni.andriot.fragments.ProjectListFragment"
+    <FrameLayout
+        android:id="@+id/left_container"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_weight="1"/>
 
-</android.support.constraint.ConstraintLayout>
+    <FrameLayout
+        android:id="@+id/right_container"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+</LinearLayout>

@@ -163,6 +163,11 @@ public class ProjectListSQLiteStorage extends SQLiteOpenHelper implements Projec
     }
 
     @Override
+    public void addProjects(ArrayList<Project> projects) {
+
+    }
+
+    @Override
     public ArrayList<Project> getProjects() {
         ArrayList<Project> projects= new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -228,7 +233,7 @@ public class ProjectListSQLiteStorage extends SQLiteOpenHelper implements Projec
     }
 
     @Override
-    public boolean insertProject(Project project) {
+    public boolean addProject(Project project) {
         boolean isInserted = false;
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -281,8 +286,13 @@ public class ProjectListSQLiteStorage extends SQLiteOpenHelper implements Projec
     }
 
     @Override
-    public void deleteProject(long id) {
+    public void deleteProject(Project project) {
 
+    }
+
+    @Override
+    public boolean existsProject(long id) {
+        return false;
     }
 
     @Override
@@ -380,6 +390,46 @@ public class ProjectListSQLiteStorage extends SQLiteOpenHelper implements Projec
     @Override
     public void deleteDevice(long id) {
 
+    }
+
+    @Override
+    public DeviceFeature getDeviceFeature(long id) {
+        return null;
+    }
+
+    @Override
+    public boolean insertDeviceFeature(DeviceFeature feature) {
+        return false;
+    }
+
+    @Override
+    public boolean updateDeviceFeature(long id, DeviceFeature feature) {
+        return false;
+    }
+
+    @Override
+    public void deleteDeviceFeature(long id) {
+
+    }
+
+    @Override
+    public DeviceFeature getDeviceFeatureFromProject(long id, Project project) {
+        return null;
+    }
+
+    @Override
+    public boolean addDeviceFeatureToProject(Project project, DeviceFeature feature) {
+        return false;
+    }
+
+    @Override
+    public boolean removeDeviceFeatureFromProject(long id, Project project) {
+        return false;
+    }
+
+    @Override
+    public ArrayList<DeviceFeature> getAllDeviceFeaturesInProject(Project project) {
+        return null;
     }
 
     /*

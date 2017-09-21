@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="org.danibeni.andriot.ProjectListActivity">
+    <group android:id="@+id/dev_catalog_menu_group">
+        <item
+            android:id="@+id/add_device_menu"
+            android:icon="@drawable/ic_add_devices"
+            android:orderInCategory="50"
+            android:title="@string/project_add_dev_feauture"
+            app:showAsAction="always" />
+    </group>
+</menu>

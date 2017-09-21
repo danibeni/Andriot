@@ -4,22 +4,20 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.danibeni.andriot.AndriotApplication;
-import org.danibeni.andriot.ProjectActivity;
-import org.danibeni.andriot.ProjectListActivity;
-import org.danibeni.andriot.ProjectListAdapter;
 import org.danibeni.andriot.ProjectListSingleton;
 import org.danibeni.andriot.R;
 import org.danibeni.andriot.model.Project;
@@ -31,6 +29,9 @@ import java.util.ArrayList;
  */
 
 public class ProjectListFragment extends Fragment {
+    private static final String TAG = ProjectListFragment.class.getSimpleName();
+    private static final String PROJECT_LIST_BUNDLE_KEY = "project_list_key";
+    public static final String PROJECT_LIST_FRAGMENT_TAG = "project_list_fragment";
 
     private Context context;
     private Activity activity;
@@ -39,19 +40,70 @@ public class ProjectListFragment extends Fragment {
     //RecyclerView Projects
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private ProjectListAdapter projectsAdapter;
-    private ProjectListSingleton projectListSingleton;
+    private ProjectListRecyclerViewAdapter projectsAdapter;
 
+    private OnProjectListFragmentInteractionListener mListener;
+
+    public static ProjectListFragment newInstance(ArrayList<Project> projects) {
+        ProjectListFragment projectListFragment = new ProjectListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList(PROJECT_LIST_BUNDLE_KEY, projects);
+        projectListFragment.setArguments(bundle);
+
+        return projectListFragment;
+}
+
+    @Override
+    public void onCreate(Bundle savedInstanceSate) {
+        super.onCreate(savedInstanceSate);
+        if (getArguments() != null) {
+            // Get Project data from activity
+            projects = getArguments().getParcelableArrayList(PROJECT_LIST_BUNDLE_KEY);
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (container != null) {
+            container.removeAllViews();
+        }
+        View view = inflater.inflate(R.layout.fragment_project_list, container, false);
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.project_list_recycler_view);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                LinearLayoutManager.VERTICAL);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+        projectsAdapter = new ProjectListRecyclerViewAdapter(getActivity(), projects, mListener);
+        recyclerView.setAdapter(projectsAdapter);
+
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onProjectListFragmentShowEditProject(Project.PROJECT_EMPTY);
+            }
+        });
+        return view;
+    }
 
     @TargetApi(23)
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         this.context = context;
-        projectListSingleton = ProjectListSingleton.getInstance(context);
         if (context instanceof Activity) {
             this.activity = (Activity) context;
-            projects = ProjectListSingleton.getInstance(context).getProjects();
+            projects = Project.ProjectListSample();
+            try {
+                mListener = (OnProjectListFragmentInteractionListener) activity;
+            } catch (ClassCastException cce) {
+                throw new ClassCastException(activity.toString()
+                        + " must implement OnHeadlineSelectedListener");
+
+            }
         }
     }
 
@@ -75,32 +127,27 @@ public class ProjectListFragment extends Fragment {
     protected void onAttachToContext(Context context) {
         if (context instanceof Activity) {
             this.activity = (Activity) context;
-            projectListSingleton = ProjectListSingleton.getInstance(context);
+            projects = Project.ProjectListSample();
+            try {
+                mListener = (OnProjectListFragmentInteractionListener) activity;
+            } catch (ClassCastException cce) {
+                throw new ClassCastException(activity.toString()
+                        + " must implement OnHeadlineSelectedListener");
+
+            }
         }
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View vista = inflater.inflate(R.layout.fragment_project_list, container, false);
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
 
-        recyclerView = (RecyclerView) vista.findViewById(R.id.project_list_recycler_view);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
-                LinearLayoutManager.VERTICAL);
-        recyclerView.addItemDecoration(dividerItemDecoration);
-        projectsAdapter = new ProjectListAdapter(getActivity(), projectListSingleton.getProjects());
-        projectListSingleton.setProjectListAdapter(projectsAdapter);
-        recyclerView.setAdapter(projectListSingleton.getProjectListAdapter());
-
-        projectsAdapter.setOnItemClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((ProjectListActivity) activity).showProject(recyclerView.getChildAdapterPosition(v));
-            }
-        });
-        return vista;
+    //Interface for container activity of this Fragment
+    public interface OnProjectListFragmentInteractionListener {
+        public void onProjectListFragmentShowProject(Project project);
+        public void onProjectListFragmentShowEditProject(Project project);
+        public void onProjectListFragmentDeleteProject(Project project);
     }
 }

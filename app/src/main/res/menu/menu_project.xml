@@ -3,21 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="org.danibeni.andriot.ProjectListActivity">
-    <item
-        android:id="@+id/project_add_feature"
-        android:icon="@drawable/ic_add_dev_feature"
-        android:orderInCategory="50"
-        android:title="@string/project_add_dev_feauture"
-        app:showAsAction="always"/>
-    <item
-        android:id="@+id/project_edit"
-        android:icon="@drawable/ic_edit"
-        android:orderInCategory="90"
-        android:title="@string/project_edit"
-        app:showAsAction="ifRoom"/>
-    <item
-        android:id="@+id/project_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+    <group android:id="@+id/project_menu_group">
+        <item
+            android:id="@+id/dev_catalog_menu"
+            android:icon="@drawable/ic_list_devices"
+            android:orderInCategory="50"
+            android:title="@string/project_add_dev_feauture"
+            app:showAsAction="always" />
+        <item
+            android:id="@+id/project_edit_menu"
+            android:icon="@drawable/ic_edit"
+            android:orderInCategory="90"
+            android:title="@string/edit_project"
+            app:showAsAction="ifRoom" />
+    </group>
 </menu>

@@ -12,5 +12,12 @@
     <style name="ProjectNameText" parent="@android:style/TextAppearance">
         <item name="android:textSize">30sp</item>
     </style>
+    <style name="DefaultButton">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="FeatureValue" parent="@android:style/TextAppearance">
+        <item name="android:textSize">20sp</item>
+    </style>
 
 </resources>

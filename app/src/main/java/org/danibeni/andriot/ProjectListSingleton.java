@@ -2,6 +2,7 @@ package org.danibeni.andriot;
 
 import android.content.Context;
 
+import org.danibeni.andriot.fragments.ProjectListRecyclerViewAdapter;
 import org.danibeni.andriot.model.Project;
 
 import java.util.ArrayList;
@@ -12,8 +13,8 @@ import java.util.ArrayList;
 
 public class ProjectListSingleton {
     private Context context;
-    private ArrayList<Project> projects;
-    private ProjectListAdapter projectListAdapter;
+    private ArrayList<Project> projects = new ArrayList<>();
+    private ProjectListRecyclerViewAdapter projectListAdapter;
 
     private static ProjectListSingleton ourInstance;
 
@@ -32,7 +33,7 @@ public class ProjectListSingleton {
         return projects;
     }
 
-    public ProjectListAdapter getProjectListAdapter() {
+    public ProjectListRecyclerViewAdapter getProjectListAdapter() {
         return projectListAdapter;
     }
 
@@ -40,7 +41,7 @@ public class ProjectListSingleton {
         this.projects = projects;
     }
 
-    public void setProjectListAdapter(ProjectListAdapter projectListAdapter) {
+    public void setProjectListAdapter(ProjectListRecyclerViewAdapter projectListAdapter) {
         this.projectListAdapter = projectListAdapter;
     }
 }

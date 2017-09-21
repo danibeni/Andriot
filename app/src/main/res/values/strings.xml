@@ -4,11 +4,24 @@
     <string name="name">Name</string>
     <string name="description">Description</string>
     <string name="add_project">Add project</string>
+    <string name="edit_project">Edit Project</string>
+    <string name="cancel">Cancel</string>
     <string name="err_project_name_empty">Project name could not be empty</string>
+    <string name="err_field_empty">Field could not be empty</string>
     <string name="err_input_required">Valid Input Required</string>
     <string name="project_list_activity_label">AndrIOT Project List</string>
     <string name="new_project_activity_label">New Project</string>
     <string name="project_activity_label">AndrIOT Project</string>
-    <string name="project_edit">Edit</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="remove">Remove</string>
     <string name="project_add_dev_feauture">Add Feature</string>
+    <string name="add">Add</string>
+    <string name="feature_name">Name</string>
+    <string name="done">Done</string>
+    <string name="device_address">Device Address</string>
+    <string name="device_port">Device Port</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

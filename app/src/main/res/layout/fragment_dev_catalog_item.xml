@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_device_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tv_device_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+            <Button
+                android:id="@+id/btn_add_device"
+                style="@style/DefaultButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignRight="@id/tv_device_name"
+                android:drawableLeft="@drawable/ic_add_dev_feature"
+                android:drawablePadding="2dip"
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip"
+                android:text="@string/add" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/device_feature_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:paddingTop="10dip"
+                android:layout_below="@+id/tv_device_name"
+                android:visibility="visible"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>
